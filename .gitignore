@@ -1,0 +1,5 @@
+data/finance.json
+__pycache__/
+*.pyc
+*.log
+.venv/

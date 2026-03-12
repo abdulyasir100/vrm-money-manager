@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Money Manager</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="starfield" id="starfield"></div>
+        <div class="toast-container" id="toasts"></div>
+
+        <div class="app">
+            <header>
+                <h1>Money Manager</h1>
+                <p class="subtitle">Every rupiah counts, you know?</p>
+            </header>
+
+            <!-- Balance Card -->
+            <section class="balance-card" id="balanceCard">
+                <div class="balance-main">
+                    <span class="balance-label">Balance</span>
+                    <span class="balance-amount" id="balanceAmount">...</span>
+                </div>
+                <div class="balance-row">
+                    <div class="balance-stat income">
+                        <span class="stat-label">Income</span>
+                        <span class="stat-value" id="monthlyIncome">...</span>
+                    </div>
+                    <div class="balance-stat expense">
+                        <span class="stat-label">Expense</span>
+                        <span class="stat-value" id="monthlyExpense">...</span>
+                    </div>
+                </div>
+                <div class="spending-bar-container" id="spendingBarContainer">
+                    <div class="spending-bar" id="spendingBar"></div>
+                </div>
+                <div class="spending-label" id="spendingLabel"></div>
+            </section>
+
+            <!-- Settings Row -->
+            <section class="settings-row">
+                <div class="setting-item">
+                    <label for="settingCurrency">Currency</label>
+                    <input type="text" id="settingCurrency" value="IDR" />
+                </div>
+                <div class="setting-item">
+                    <label for="settingBudget">Monthly Budget</label>
+                    <input type="number" id="settingBudget" value="0" min="0" />
+                </div>
+                <button onclick="saveSettings()">Save</button>
+            </section>
+
+            <!-- Add Transaction -->
+            <section class="create-form">
+                <div class="form-row">
+                    <select id="txType">
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                    <input
+                        type="number"
+                        id="txAmount"
+                        placeholder="Amount"
+                        min="1"
+                    />
+                    <input type="text" id="txDesc" placeholder="Description" />
+                    <input type="text" id="txCategory" placeholder="Category" />
+                    <button onclick="handleCreate()">Add</button>
+                </div>
+            </section>
+
+            <!-- Filters -->
+            <section class="filters">
+                <div class="filter-group">
+                    <button
+                        class="filter-btn active"
+                        onclick="setTypeFilter('', this)"
+                    >
+                        All
+                    </button>
+                    <button
+                        class="filter-btn"
+                        onclick="setTypeFilter('income', this)"
+                    >
+                        Income
+                    </button>
+                    <button
+                        class="filter-btn"
+                        onclick="setTypeFilter('expense', this)"
+                    >
+                        Expense
+                    </button>
+                </div>
+                <input
+                    type="text"
+                    id="categoryFilter"
+                    placeholder="Filter category"
+                    oninput="fetchTransactions()"
+                />
+            </section>
+
+            <!-- Transaction List -->
+            <section class="tx-list" id="txList">
+                <p class="empty-state">No transactions yet.</p>
+            </section>
+
+            <footer>
+                <div class="dev-tools">
+                    <button class="dev-btn" onclick="seedData()">
+                        Seed Sample
+                    </button>
+                    <button class="dev-btn danger" onclick="resetData()">
+                        Reset All
+                    </button>
+                </div>
+            </footer>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
